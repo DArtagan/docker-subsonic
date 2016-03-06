@@ -40,7 +40,7 @@ RUN (mkdir /data &&\
 
 USER subsonic
 WORKDIR /var/subsonic
-EXPOSE 4040 4443
+EXPOSE 4040
 VOLUME ["/data"]
 
-CMD ["java","-Xmx1024m","-Dsubsonic.home=/var/subsonic","-Dsubsonic.host=0.0.0.0","-Dsubsonic.port=4040","-Dsubsonic.httpsPort=4443","-Dsubsonic.contextPath=/","-Dsubsonic.defaultMusicFolder=/data/music","-Dsubsonic.defaultPodcastFolder=/data/Podcast","-Dsubsonic.defaultPlaylistFolder=/data/playlists","-Djava.awt.headless=true","-jar","subsonic-booter-jar-with-dependencies.jar"]
+CMD ["java","-Xmx1024m","-Dsubsonic.home=/var/subsonic","-Dsubsonic.host=0.0.0.0","-Dsubsonic.port=4040","-Dsubsonic.contextPath=/","-Dsubsonic.defaultMusicFolder=/data/music","-Dsubsonic.defaultPodcastFolder=/data/Podcast","-Dsubsonic.defaultPlaylistFolder=/data/playlists","-Djava.awt.headless=true","-jar","subsonic-booter-jar-with-dependencies.jar"]
