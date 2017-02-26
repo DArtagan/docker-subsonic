@@ -17,20 +17,22 @@ RUN apk add --no-cache \
  && wget https://libresonic.org/release/libresonic-v$LIBRESONIC_VERSION.war -O /usr/local/tomcat/webapps/ROOT.war \
  && apk del build-dependencies
 
-# create transcode folder and add ffmpeg
-RUN mkdir /var/libresonic \
- && mkdir /var/libresonic/transcode \
- && cd /var/libresonic/transcode \
- && ln -s /usr/bin/ffmpeg \
- && ln -s /usr/bin/flac \
- && ln -s /usr/bin/lame
+# Create the main folder
+RUN mkdir /var/libresonic
 
-# create data directories and symlinks to make it easier to use a volume
+# Create data directories and symlinks to make it easier to use a volume
 RUN mkdir /data \
  && cd /data \
  && mkdir db jetty lucene2 lastfmcache thumbs music Podcast playlists \
  && touch libresonic.properties libresonic.log \
  && ln -s /data/* /var/libresonic
+
+# create transcode folder and add binaries
+RUN mkdir /var/libresonic/transcode \
+ && cd /var/libresonic/transcode \
+ && ln -s /usr/bin/ffmpeg \
+ && ln -s /usr/bin/flac \
+ && ln -s /usr/bin/lame
 
 # Use the libresonic user for everything
 RUN adduser -h /var/libresonic -D libresonic \
